@@ -198,18 +198,17 @@
   box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset, 0 2px 6px rgba(0, 0, 0, 0.5), 0 10px rgba(0, 0, 0, 0.05) inset;
 }
 
-button:active {
-  //   margin-left: 2px;
-  //   margin-right: -2px;
-}
-
 /**
  * Style A
  */
 button:active.clear-a,
 button:active.red-a,
 button:active.green-a,
-button:active.blue-a {
+button:active.blue-a,
+button.active.clear-a,
+button.active.red-a,
+button.active.green-a,
+button.active.blue-a {
   -webkit-transition: none !important;
   -moz-transition: none !important;
   -o-transition: none !important;
@@ -224,7 +223,8 @@ button:hover.clear-a {
     0 0 5px 2px rgba(255, 255, 255, 0.75), 0 0 10px 2px rgba(255, 255, 255, 0.75) inset;
 }
 
-button:active.clear-a {
+button:active.clear-a,
+button.active.clear-a {
   color: rgba(0, 0, 0, 1);
 
   border-color: rgba(255, 255, 255, 0.6) !important;
@@ -270,7 +270,8 @@ button:hover.red-a {
     0 0 5px 2px rgba(255, 120, 120, 0.75), 0 0 10px 2px rgba(255, 120, 120, 0.75) inset;
 }
 
-button:active.red-a {
+button:active.red-a,
+button.active.red-a {
   color: rgba(255, 230, 230, 0.99);
   text-shadow: 0px 0px 2px rgba(255, 230, 230, 0.99), 0px 0px 4px rgba(255, 200, 200, 0.99);
 
@@ -318,7 +319,8 @@ button:hover.green-a {
     0 0px 5px 2px rgba(110, 255, 185, 0.75), 0 0px 10px 2px rgba(110, 255, 185, 0.75) inset;
 }
 
-button:active.green-a {
+button:active.green-a,
+button.active.green-a {
   color: rgba(220, 255, 240, 0.99);
   text-shadow: 0px 0px 2px rgba(220, 255, 240, 0.99), 0px 0px 4px rgba(180, 255, 220, 0.99);
 
@@ -366,7 +368,8 @@ button:hover.blue-a {
     0 0px 5px 2px rgba(120, 200, 255, 0.75), 0 0px 10px 2px rgba(120, 200, 255, 0.75) inset;
 }
 
-button:active.blue-a {
+button:active.blue-a,
+button.active.blue-a {
   color: rgba(230, 240, 255, 0.99);
   text-shadow: 0px 0px 2px rgba(230, 240, 255, 0.99), 0px 0px 4px rgba(200, 230, 255, 0.99);
 
@@ -446,7 +449,8 @@ button:hover.clear-b {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* W3C */
 }
 
-button:active.clear-b {
+button:active.clear-b,
+button.active.clear-b {
   border-color: rgba(255, 255, 255, 0.6) !important;
 
   box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset, 0 10px 0 0 rgba(255, 255, 255, 0.5) inset, 0 0 5px 2px rgba(255, 255, 255, 0.75),
@@ -486,7 +490,8 @@ button:hover.red-b {
   background: radial-gradient(ellipse at center, rgba(255, 120, 120, 1) 0%, rgba(255, 120, 120, 0) 100%); /* W3C */
 }
 
-button:active.red-b {
+button:active.red-b,
+button.active.red-b {
   text-shadow: 0px 0px 2px rgba(255, 230, 230, 0.99), 0px 0px 4px rgba(255, 200, 200, 0.99);
   border-color: rgba(255, 180, 180, 0.6) !important;
 
@@ -527,7 +532,8 @@ button:hover.green-b {
   background: radial-gradient(ellipse at center, rgba(110, 255, 185, 1) 0%, rgba(110, 255, 185, 0) 100%); /* W3C */
 }
 
-button:active.green-b {
+button:active.green-b,
+button.active.green-b {
   text-shadow: 0px 0px 2px rgba(220, 255, 240, 0.99), 0px 0px 4px rgba(190, 255, 210, 0.99);
   border-color: rgba(110, 255, 185, 0.6) !important;
 
@@ -568,7 +574,8 @@ button:hover.blue-b {
   background: radial-gradient(ellipse at center, rgba(120, 200, 255, 1) 0%, rgba(120, 200, 255, 0) 100%); /* W3C */
 }
 
-button:active.blue-b {
+button:active.blue-b,
+button.active.blue-b {
   text-shadow: 0px 0px 2px rgba(230, 240, 255, 0.99), 0px 0px 4px rgba(200, 210, 255, 0.99);
   border-color: rgba(120, 200, 255, 0.6) !important;
 

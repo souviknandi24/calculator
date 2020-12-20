@@ -1,8 +1,8 @@
-import { Component, OnInit, ɵɵtrustConstantResourceUrl } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 
 import { BigNumber } from 'bignumber.js';
+import { GlassButtonComponent } from './../glass-button/glass-button.component';
 import { MessageService } from 'primeng/api';
-import { evaluate } from 'mathjs';
 
 @Component({
   selector: 'app-basic',
@@ -51,10 +51,49 @@ export class BasicComponent implements OnInit {
       { className: 'basic-calculator-buttons', id: '+', icon: 'fas fa-plus', name: '', tint: 'blue', tintGroup: 'a' },
     ],
   ];
+  buttonsElementReferences: any = {};
+  lastKey: string = '';
 
   constructor(private messageService: MessageService) {}
+  @ViewChildren(GlassButtonComponent, { read: ElementRef }) calculatorButtonsList: ElementRef[] = [];
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let key = 'button-';
+
+    if (this.lastKey == 'Control' && (event.key == 'c' || event.key == 'C')) {
+      key += 'C';
+    } else if (event.key === 'Backspace' || event.key === 'Delete') {
+      key += 'DEL';
+    } else if (event.key === 'Enter') {
+      key += '=';
+    } else if (this.numbers.includes(event.key) || this.operators.includes(event.key)) {
+      key += event.key;
+    }
+
+    let buttonReference = this.buttonsElementReferences[key];
+
+    if (buttonReference) {
+      buttonReference.click();
+      buttonReference.classList.add('active');
+      setTimeout(() => {
+        buttonReference.classList.remove('active');
+      }, 200);
+    }
+
+    this.lastKey = event.key;
+  }
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.calculatorButtonsList.map((component: ElementRef) => {
+      let buttonReference = component.nativeElement.childNodes[0];
+      this.buttonsElementReferences[buttonReference?.id] = buttonReference;
+    });
+  }
 
   bigNumberArithmetic(a: BigNumber, b: BigNumber, p: string): BigNumber {
     if (p == '+') {
