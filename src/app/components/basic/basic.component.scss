@@ -11,6 +11,13 @@
   text-align: right;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .arithmetic-input {
   font-size: 26px;
 }

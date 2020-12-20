@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵɵtrustConstantResourceUrl } from '@angular/core';
 
+import { BigNumber } from 'bignumber.js';
 import { MessageService } from 'primeng/api';
+import { evaluate } from 'mathjs';
 
 @Component({
   selector: 'app-basic',
@@ -11,7 +13,7 @@ export class BasicComponent implements OnInit {
   data = '';
   currentInput = '0';
   currentOperator = '';
-  currentResult = 0;
+  currentResult = new BigNumber('0');
 
   operators = ['%', '+', '-', '*', '/', '='];
   resetButtons = ['C', 'DEL'];
@@ -52,27 +54,52 @@ export class BasicComponent implements OnInit {
 
   constructor(private messageService: MessageService) {}
 
-  get result() {
-    return this.data.length ? eval(this.data) : 0;
-  }
-
   ngOnInit(): void {}
 
+  bigNumberArithmetic(a: BigNumber, b: BigNumber, p: string): BigNumber {
+    if (p == '+') {
+      return a.plus(b);
+    }
+    if (p == '-') {
+      return a.minus(b);
+    }
+    if (p == '*') {
+      return a.multipliedBy(b);
+    }
+    if (p == '/') {
+      return a.dividedBy(b);
+    }
+    if (p == '%') {
+      return a.multipliedBy(b).dividedBy('100');
+    }
+
+    return new BigNumber('0');
+  }
+
   updateResult(buttonInput: string) {
-    if (buttonInput == 'DEL') {
+    if (buttonInput == '+-') {
+      if (this.currentInput.length > 0) {
+        this.currentInput = this.currentInput[0] == '-' ? this.currentInput.slice(1) : '-' + this.currentInput;
+      }
+    } else if (buttonInput == 'DEL') {
       this.currentInput = this.currentInput.slice(0, -1);
+      if (this.currentInput == '-') {
+        this.currentInput = '0';
+      }
     } else if (buttonInput == 'C') {
       this.currentInput = '';
-      this.currentResult = 0;
+      this.currentResult = new BigNumber('0');
       this.currentOperator = '';
     } else if (this.operators.find((d) => d == buttonInput)) {
       if (this.currentInput == '') {
         this.currentOperator = buttonInput !== '=' ? buttonInput : '';
       } else {
+        /* BIG NUMBER CALCULATION */
+        let curVal = new BigNumber(this.currentInput == '' ? '0' : this.currentInput);
+
         this.currentResult =
-          this.currentOperator !== ''
-            ? eval(this.currentResult.toString() + this.currentOperator + (this.currentInput == '' ? '0' : this.currentInput))
-            : eval(this.currentInput == '' ? '0' : this.currentInput);
+          this.currentOperator !== '' ? this.bigNumberArithmetic(this.currentResult, curVal, this.currentOperator) : curVal;
+
         if (buttonInput == '=') {
           this.currentOperator = '';
           this.currentInput = this.currentResult.toString();
@@ -83,8 +110,8 @@ export class BasicComponent implements OnInit {
       }
     } else if (this.numbers.find((d) => d == buttonInput)) {
       const [val, precision] = this.currentInput.split('.');
-      console.log(val, precision);
-      if (val?.length > 15 && buttonInput != '.' && !this.currentInput.includes('.')) {
+
+      if (val?.length >= 15 && buttonInput != '.' && !this.currentInput.includes('.')) {
         this.messageService.add({
           severity: 'warn',
           summary: 'Maximum 15 digits of whole number and 9 digits of fractional part is allowed.',
@@ -92,7 +119,7 @@ export class BasicComponent implements OnInit {
           closable: true,
           life: 3000,
         });
-      } else if (precision && precision?.length > 10) {
+      } else if (precision && precision?.length >= 9) {
         this.messageService.add({
           severity: 'warn',
           summary: 'Maximum 15 digits of whole number and 9 digits of fractional part is allowed.',

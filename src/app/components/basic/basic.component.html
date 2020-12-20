@@ -1,6 +1,6 @@
 <div class="basic-calculator">
   <div class="display">
-    <div class="arithmetic-result">RESULT: {{ currentResult }}</div>
+    <div class="arithmetic-result">RESULT: {{ currentResult.toString() }}</div>
     <div class="arithmetic-operator">OPERATOR: {{ currentOperator }}</div>
     <div class="arithmetic-input">{{ currentInput != '' ? currentInput : '0' }}</div>
   </div>
