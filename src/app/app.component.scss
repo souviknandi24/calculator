@@ -23,6 +23,14 @@
     font-size: 1.6rem;
     margin-right: 3rem;
   }
+
+  &__menu::ng-deep {
+    .p-menubar-root-list,
+    .p-menu-list {
+      width: 150px;
+      margin-left: -100px;
+    }
+  }
 }
 
 .main {
@@ -30,4 +38,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
+}
+
+::ng-deep {
+  .highResolutionMenuBar {
+    display: block !important;
+  }
+
+  .lowResolutionMenuBar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  ::ng-deep {
+    .highResolutionMenuBar {
+      display: none !important;
+    }
+
+    .lowResolutionMenuBar {
+      display: block !important;
+    }
+  }
 }

@@ -2,7 +2,8 @@
   <div class="header">
     <div class="header__title">CALCULATOR</div>
     <div class="header__menu">
-      <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+      <p-tabMenu [model]="items" [activeItem]="activeItem" [styleClass]="'highResolutionMenuBar'"></p-tabMenu>
+      <p-menubar [model]="items" [styleClass]="'lowResolutionMenuBar'"></p-menubar>
     </div>
   </div>
   <main class="main">
