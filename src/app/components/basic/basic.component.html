@@ -1,0 +1,16 @@
+<div class="basic-calculator">
+  <div class="display">
+    <div class="arithmetic-result">RESULT: {{ currentResult }}</div>
+    <div class="arithmetic-operator">OPERATOR: {{ currentOperator }}</div>
+    <div class="arithmetic-input">{{ currentInput != '' ? currentInput : '0' }}</div>
+  </div>
+  <div class="buttons">
+    <div class="buttons-group" *ngFor="let buttonsGroup of buttonsGroupList">
+      <app-glass-button
+        *ngFor="let buttonData of buttonsGroup"
+        [buttonData]="buttonData"
+        (onClickEvent)="updateResult($event)"
+      ></app-glass-button>
+    </div>
+  </div>
+</div>

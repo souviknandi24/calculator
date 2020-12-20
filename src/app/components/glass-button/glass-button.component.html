@@ -1,0 +1,11 @@
+<button
+  [id]="'button-' + buttonData.id"
+  [ngClass]="buttonData.tint + '-' + buttonData.tintGroup"
+  [class]="'button glass' + ' ' + buttonData.className"
+  type="button"
+  (click)="onClick()"
+>
+  <i *ngIf="buttonData.icon" [ngClass]="buttonData.icon"></i>
+  <span *ngIf="buttonData.name" class="button__name">{{ buttonData.name }}</span>
+  <ng-content></ng-content>
+</button>

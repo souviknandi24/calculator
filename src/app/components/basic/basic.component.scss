@@ -1,0 +1,16 @@
+@import './../../shared/styles/common.scss';
+
+.display {
+  margin: 8px;
+  background-color: white;
+  padding: 10px;
+  font-size: 20px;
+  line-height: 40px;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.2);
+  text-align: right;
+}
+
+.arithmetic-input {
+  font-size: 26px;
+}

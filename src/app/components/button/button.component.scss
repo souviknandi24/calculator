@@ -1,0 +1,8 @@
+.btn {
+  box-shadow: -10px -10px 10px #fff, 10px 10px 15px #6687a8, inset -5px -5px 10px #6687a8, inset 5px 5px 10px #fff;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  box-shadow: 0 0 0 #fff, 0 0 0 #6687a8, inset -5px -5px 10px #6687a8, inset 5px 5px 10px #fff;
+}
